@@ -8,13 +8,7 @@
 
   <!-- Main Sidebar Container -->
   @include('layouts.partials._sidebar')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Main content -->
-    <section class="content">
-        @yield('main-content')
-    </section>
-    <!-- /.content -->
-  </div>
+ 
+  @yield('main-content')
   <!-- /.content-wrapper -->
   @include('layouts.partials._footer')
