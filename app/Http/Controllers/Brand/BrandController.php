@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Category;
+namespace App\Http\Controllers\Brand;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
-class CategoryController extends Controller
+use App\Models\Brand;
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('created_at')->get();
-        return view('layouts.admin.category.index',compact('categories'));
+        $brands = Brand::orderBy('created_at')->get();
+        return view('layouts.admin.brand.index',compact('brands'));
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('layouts.admin.category.add');
+        return view('layouts.admin.brand.add');
     }
 
     /**
@@ -37,13 +37,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "name" => "required|unique:categories,name",
+            "name" => "required|unique:brands,name",
         ]);
         
-        $category       = new Category();
-        $category->name = $request->name;
-        $category->save();
-        return redirect()->route('categories.index')->with('success','Category created successfully!');
+        $brand       = new Brand();
+        $brand->name = $request->name;
+        $brand->save();
+        return redirect()->route('brands.index')->with('success','Brand created successfully!');
 
     }
 
@@ -66,8 +66,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('layouts.admin.category.edit',compact('category'));
+        $brand = Brand::findOrFail($id);
+        return view('layouts.admin.brand.edit',compact('brand'));
 
     }
 
@@ -82,13 +82,13 @@ class CategoryController extends Controller
     {
       
         $request->validate([
-            'name' => 'required|unique:categories,name, ' .$id,
+            'name' => 'required|unique:brands,name, ' .$id,
         ]);
         
-        $category       = Category::find($id);
-        $category->name = $request->name;
-        $category->save();
-        return redirect()->route('categories.index')->with('success','Category updated successfully!');
+        $brand       = Brand::find($id);
+        $brand->name = $request->name;
+        $brand->save();
+        return redirect()->route('brands.index')->with('success','Brand updated successfully!');
     }
 
     /**
@@ -99,8 +99,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category       = Category::find($id);
-        $category->delete();
-        return back()->with('success','Category deleted successfully!');
+        $brand       = Brand::findOrFail($id);
+        $brand->delete();
+        return back()->with('success','Brand deleted successfully!');
     }
 }

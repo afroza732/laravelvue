@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Brand\BrandController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,4 +24,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 //Category
 Route::resource('categories', CategoryController::class)->middleware('auth');
+//Brand
+Route::resource('brands', BrandController::class)->middleware('auth');
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title') 
-Category
+Brand
 @endsection
 @section('main-content')
 
@@ -16,12 +16,12 @@ Category
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Category</h1>
+            <h1>Edit Brand</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Category</li>
+              <li class="breadcrumb-item active">Brand</li>
             </ol>
           </div>
         </div>
@@ -37,18 +37,19 @@ Category
             <!-- jquery validation -->
             <div class="card card-primary">
               <!-- form start -->
-              <form id="quickForm" method="post" action="{{route('brands.store')}}">
+              <form id="quickForm" method="POST" action="{{route('brands.update',$brand->id)}}">
                 @csrf
+                @method('PUT')
                 <div class="card-body">
                   <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter category name">
+                    <input type="text" name="name" value="{{$brand->name}}" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter category name">
                     @error('name') <p class="text-danger">{{ $message }}</p>@enderror
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <input type="submit" class="btn btn-primary" value="Submit">
+                  <input type="submit" class="btn btn-primary" value="Update">
                   {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
                 </div>
               </form>
