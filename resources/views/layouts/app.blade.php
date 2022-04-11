@@ -11,6 +11,7 @@
   <!-- Main Sidebar Container -->
   @include('layouts.partials._sidebar')
   <div class="content-wrapper" id="app">
+    {{-- <product-component></product-component> --}}
     {{-- <example-component></example-component> --}}
     @yield('main-content')
   </div>

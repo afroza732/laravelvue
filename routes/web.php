@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Brand\BrandController;
+use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Size\SizeController;
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,6 @@ Route::resource('brands', BrandController::class)->middleware('auth');
 
 //Size
 Route::resource('sizes', SizeController::class)->middleware('auth');
+//Size
+Route::resource('products', ProductController::class)->middleware('auth');
 
