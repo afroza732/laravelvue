@@ -15,6 +15,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
+
 <script src="{{asset('admin/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -39,6 +40,7 @@
 <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -72,6 +74,7 @@
     });
   })
 </script>
+<script src="{{ mix('/js/app.js') }}"></script>
 @stack('scripts')
 
 </body>

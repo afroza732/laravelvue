@@ -4,7 +4,6 @@ Size
 @endsection
 @section('main-content')
 
-<div class="content-wrapper">
       @if ($message = Session::get('success'))
     <div class="alert alert-success alert-block">
         <button type="button" class="close" data-dismiss="alert">×</button>    
@@ -65,7 +64,4 @@ Size
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
-  </div>
-  
 @endsection
