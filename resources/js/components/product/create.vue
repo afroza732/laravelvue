@@ -9,8 +9,8 @@
                 <form id="quickForm" method="post" action="">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Enter product name">
+                        <label for="name">Category</label>
+                        <Select2 v-model="form.category_id" :options="categories" :settings="{ placeholder: 'Select Category'}"/>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -32,7 +32,28 @@
     </div><!-- /.container-fluid -->
 </template>
 <script>
+    import store from '../../store'
+    import * as actions from '../../store/action-type'
+    import { mapGetters } from 'vuex'
+    import Select2 from 'vue3-select2-component';
     export default{
-
+        components: {Select2},
+        data(){
+            return{
+                form:{
+                    category_id : 0
+                }
+            }
+        },
+        computed: {
+            // mix the getters into computed with object spread operator
+            ...mapGetters({
+                categories: 'getCategories'
+            })
+           
+        },  
+        mounted(){
+            store.dispatch(actions.GET_CATEGORIES)
+        }
     }
 </script>

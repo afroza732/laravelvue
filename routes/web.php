@@ -24,13 +24,17 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-//Category
-Route::resource('categories', CategoryController::class)->middleware('auth');
-//Brand
-Route::resource('brands', BrandController::class)->middleware('auth');
+Route::middleware(['auth:sanctum'])->group(function () {
+    //Category
+    Route::resource('categories', CategoryController::class);
+     Route::get('/api/get-categories',[CategoryController::class,'getAllCategoryResponse']);
+    //Brand
+    Route::resource('brands', BrandController::class);
 
-//Size
-Route::resource('sizes', SizeController::class)->middleware('auth');
-//Size
-Route::resource('products', ProductController::class)->middleware('auth');
+    //Size
+    Route::resource('sizes', SizeController::class);
+    //Size
+    Route::resource('products', ProductController::class);
+});
+
 

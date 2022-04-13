@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Response;
+
 class CategoryController extends Controller
 {
     /**
@@ -102,5 +104,15 @@ class CategoryController extends Controller
         $category       = Category::find($id);
         $category->delete();
         return back()->with('success','Category deleted successfully!');
+    }
+
+    //handle category response data
+
+    public function getAllCategoryResponse(){
+        $categories = Category::all();
+        return response([
+            'success' => true,
+            'data' => $categories
+        ],Response::HTTP_OK);
     }
 }
