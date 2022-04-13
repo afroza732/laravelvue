@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Size;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Size;
+use Illuminate\Http\Response;
 class SizeController extends Controller
 {
     /**
@@ -102,5 +103,13 @@ class SizeController extends Controller
         $size       = Size::findOrFail($id);
         $size->delete();
         return back()->with('success','Size deleted successfully!');
+    }
+
+    public function getAllSizesResponse(){
+        $sizes = Size::all();
+        return response([
+            'success' => true,
+            'data' => $sizes
+        ],Response::HTTP_OK);
     }
 }

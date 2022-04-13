@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Brand;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use Illuminate\Http\Response;
 class BrandController extends Controller
 {
     /**
@@ -102,5 +103,13 @@ class BrandController extends Controller
         $brand       = Brand::findOrFail($id);
         $brand->delete();
         return back()->with('success','Brand deleted successfully!');
+    }
+
+    public function getAllBrandsResponse(){
+        $brands = Brand::all();
+        return response([
+            'success' => true,
+            'data' => $brands
+        ],Response::HTTP_OK);
     }
 }

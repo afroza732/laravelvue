@@ -30,9 +30,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
      Route::get('/api/get-categories',[CategoryController::class,'getAllCategoryResponse']);
     //Brand
     Route::resource('brands', BrandController::class);
-
+    Route::get('/api/get-brands',[BrandController::class,'getAllBrandsResponse']);
     //Size
     Route::resource('sizes', SizeController::class);
+    Route::get('/api/get-sizes',[SizeController::class,'getAllSizesResponse']);
     //Size
     Route::resource('products', ProductController::class);
 });
