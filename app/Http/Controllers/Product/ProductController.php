@@ -36,15 +36,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        return $request->all();
         $request->validate([
             "name" => "required|unique:categories,name",
         ]);
         
-        $category       = new Category();
-        $category->name = $request->name;
-        $category->save();
-        return redirect()->route('categories.index')->with('success','Category created successfully!');
-
     }
 
     /**
@@ -66,7 +62,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        $products = Product::find($id);
         return view('layouts.admin.category.edit',compact('category'));
 
     }
@@ -85,7 +81,7 @@ class ProductController extends Controller
             'name' => 'required|unique:categories,name, ' .$id,
         ]);
         
-        $category       = Category::find($id);
+        $category       = Product::find($id);
         $category->name = $request->name;
         $category->save();
         return redirect()->route('categories.index')->with('success','Category updated successfully!');
@@ -99,7 +95,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $category       = Category::find($id);
+        $category       = Product::find($id);
         $category->delete();
         return back()->with('success','Category deleted successfully!');
     }
