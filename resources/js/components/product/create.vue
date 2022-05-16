@@ -2,6 +2,7 @@
     <div class="container-fluid">
         <form id="quickForm" method="post" @submit.prevent="submitForm">
         <div class="row">
+            <show-errors></show-errors>
             <!-- left column -->
             <div class="col-md-6">
             <!-- jquery validation -->
@@ -26,7 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label for="image">Image<span style="color:red;">*</span></label>
-                            <input type="file" name="image"  class="form-control">
+                            <input @change="selectImage" type="file"  class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="cost_price">Cost Price($)<span style="color:red;">*</span></label>
@@ -42,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             <label for="year">Description<span style="color:red;">*</span></label>
-                            <input type="text" v-model="year"  class="form-control" placeholder="Product Description[MAX:2022]">
+                            <input type="text" v-model="description"  class="form-control" placeholder="Product Description[MAX:2022]">
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -87,8 +88,9 @@
     import * as actions from '../../store/action-type'
     import { mapGetters } from 'vuex'
     import Select2 from 'vue3-select2-component';
+    import showErrors from '../utils/showErrors';
     export default{
-        components: {Select2},
+        components: {Select2,showErrors},
         data(){
             return{
                 form:{
@@ -127,6 +129,9 @@
             store.dispatch(actions.GET_SIZES)
         },
         methods:{
+            selectImage(e){
+                this.form.image = e.target.files[0];
+            },
             addItem(){
                 let item =  { size_id : 0,location : '', quantity : 0}
                 this.form.items.push(item)
@@ -135,7 +140,7 @@
                 this.form.items.splice(index,1)
             },
             submitForm(){
-                console.log(this.form.items)
+                console.log(this.form)
                 let data = new FormData();
                 data.append('category_id',this.form.category_id);
                 data.append('brand_id',this.form.brand_id);
@@ -145,6 +150,7 @@
                 data.append('cost_price',this.form.cost_price);
                 data.append('retail_price',this.form.retail_price);
                 data.append('year',this.form.year);
+                data.append('description',this.form.description);
                 data.append('status',this.form.status);
                 data.append('items',this.form.items);
                 store.dispatch(actions.ADD_PRODUCT,data);
