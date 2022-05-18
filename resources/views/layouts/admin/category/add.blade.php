@@ -36,7 +36,7 @@ Category
             <!-- jquery validation -->
             <div class="card card-primary">
               <!-- form start -->
-              <form id="quickForm" method="post" action="{{route('brands.store')}}">
+              <form id="quickForm" method="post" action="{{route('categories.store')}}">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">

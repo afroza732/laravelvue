@@ -19,11 +19,11 @@
                         </div>
                         <div class="form-group">
                             <label for="sku">SKU<span style="color:red;">*</span></label>
-                            <input type="text" name="sku" v-model="sku" class="form-control">
+                            <input type="text"  v-model="form.sku" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="name">Name<span style="color:red;">*</span></label>
-                            <input type="text"  v-model="sku" class="form-control">
+                            <input type="text"  v-model="form.name" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="image">Image<span style="color:red;">*</span></label>
@@ -31,19 +31,19 @@
                         </div>
                         <div class="form-group">
                             <label for="cost_price">Cost Price($)<span style="color:red;">*</span></label>
-                            <input type="text" v-model="cost_price"   class="form-control">
+                            <input type="text" v-model="form.cost_price"   class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="retail_price">Retail Price($)<span style="color:red;">*</span></label>
-                            <input type="text" v-model="retail_price"  class="form-control">
+                            <input type="text" v-model="form.retail_price"  class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="year">Year<span style="color:red;">*</span></label>
-                            <input type="text" v-model="year"  class="form-control" placeholder="Product Year[EX:2022]">
+                            <input type="text" v-model="form.year"  class="form-control" placeholder="Product Year[EX:2022]">
                         </div>
                         <div class="form-group">
                             <label for="year">Description<span style="color:red;">*</span></label>
-                            <input type="text" v-model="description"  class="form-control" placeholder="Product Description[MAX:2022]">
+                            <input type="text" v-model="form.description"  class="form-control" placeholder="Product Description[MAX:2022]">
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -59,7 +59,7 @@
                 <div class="row" v-for="(item,index) in form.items" :key="index">
                     <div class="col-sm-4">
                         <div class="form-group">
-                           <select class="form-control" v-model="item.size_id"> 
+                           <select class="form-control" v-model="item.size_id">
                                <option value="0">Select Size</option>
                                <option v-for="(size,index) in sizes" :key="index" :value="size.id">{{ size.size }}</option>
                            </select>
@@ -94,8 +94,8 @@
         data(){
             return{
                 form:{
-                    category_id : 0,
-                    brand_id : 0,
+                    category_id : '',
+                    brand_id : '',
                     sku : '',
                     name : '',
                     image : '',
@@ -121,8 +121,8 @@
                 brands: 'getBrands',
                 sizes: 'getSizes'
             })
-           
-        },  
+
+        },
         mounted(){
             store.dispatch(actions.GET_CATEGORIES),
             store.dispatch(actions.GET_BRANDS),
@@ -140,7 +140,6 @@
                 this.form.items.splice(index,1)
             },
             submitForm(){
-                console.log(this.form)
                 let data = new FormData();
                 data.append('category_id',this.form.category_id);
                 data.append('brand_id',this.form.brand_id);
@@ -152,7 +151,7 @@
                 data.append('year',this.form.year);
                 data.append('description',this.form.description);
                 data.append('status',this.form.status);
-                data.append('items',this.form.items);
+                data.append('items',JSON.stringify(this.form.items));
                 store.dispatch(actions.ADD_PRODUCT,data);
             }
         }

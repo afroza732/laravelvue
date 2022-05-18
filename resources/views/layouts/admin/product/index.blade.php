@@ -1,13 +1,13 @@
 @extends('layouts.app')
-@section('title') 
-Category
+@section('title')
+product
 @endsection
 @section('main-content')
 
 
     @if ($message = Session::get('success'))
     <div class="alert alert-success alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>    
+        <button type="button" class="close" data-dismiss="alert">×</button>
         <strong>{{ $message }}</strong>
     </div>
     @endif
@@ -16,12 +16,12 @@ Category
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Category List</h1>
+            <h1>Product List</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Category</li>
+              <li class="breadcrumb-item active">Product</li>
             </ol>
           </div>
         </div>
@@ -34,11 +34,11 @@ Category
         <div class="row">
           <div class="col-12">
             <div class="card">
-             
+
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Category List</h3>
-                <a href="{{route('categories.create')}}" class="btn btn-primary float-right"> +Add Category</a>
+                <h3 class="card-title">Product List</h3>
+                <a href="{{route('products.create')}}" class="btn btn-primary float-right"> +Add Product</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -48,27 +48,27 @@ Category
                     <th>SN#</th>
                     <th>Name</th>
                     <th width="10%">Action</th>
-                   
+
                   </tr>
                   </thead>
                     <tbody>
-                        @foreach ($categories as $key => $category)
+                        @foreach ($products as $key => $product)
                         <tr>
                             <td>{{$key + 1}}</td>
-                            <td>{{$category->name}}</td>
+                            <td>{{$product->name}}</td>
                             <td>
-                                <a href="{{route('categories.edit',$category->id)}}" class="btn btn-sm btn-primary"><span class="fa fa-edit"></span></a>
-                                <a href="javascript:;" class="btn btn-sm btn-danger sa-delete" data-form-id="category-delete-{{$category->id}}">
+                                <a href="{{route('products.edit',$product->id)}}" class="btn btn-sm btn-primary"><span class="fa fa-edit"></span></a>
+                                <a href="javascript:;" class="btn btn-sm btn-danger sa-delete" data-form-id="product-delete-{{$product->id}}">
                                     <span class="fa fa-trash"></span>
                                 </a>
-                                <form id="category-delete-{{$category->id}}" action="{{ route('categories.destroy', $category->id)}}" method="post">
+                                <form id="product-delete-{{$product->id}}" action="{{ route('products.destroy', $product->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                 </form>
                             </td>
-                        </tr> 
+                        </tr>
                         @endforeach
-                       
+
                     </tbody>
                 </table>
               </div>
